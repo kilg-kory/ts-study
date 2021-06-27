@@ -5,6 +5,13 @@ import 'materialize-css/dist/css/materialize.min.css'
 import { ToDoForm } from './components/todo-form';
 import { TodoList } from './components/todo-list';
 import { ITodo } from './interfaces';
+import DnD from './containers/dnd'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 
@@ -55,11 +62,22 @@ const App: React.FC = () => {
 
   return (
     <>
+    <Router>
       <Navbar />
-      <div className='container'>
-        <ToDoForm onAdd={addHandler} />
-        <TodoList todos={todos} onToggle={toggleHandler} onRemove={removeHandler} />
-      </div>
+        <Switch>
+          <Route exact path="/">
+            <div className='container'>
+              <ToDoForm onAdd={addHandler} />
+              <TodoList todos={todos} onToggle={toggleHandler} onRemove={removeHandler} />
+            </div>
+          </Route>
+          <Route path="/dnd">
+              <DnD />
+          </Route>
+        </Switch>
+    
+
+      </Router>
     </>
   );
 }
